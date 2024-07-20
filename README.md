@@ -84,12 +84,61 @@ http::run "$@"
 ```
 
 # ⚡ Benchmarking
-To benchmark HTTB, use the Python module `Locust`. Configuration files are in the `benchmark` folder. Set up and run Locust with the following commands:
+It's... bad 🥲
 
-```sh
-cd benchmark
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-locust
+All benchmarks were conducted on an i7-1360P laptop with 16GB of RAM using the tool codesenberg/bombardier. The benchmark folder in the repository contains all the source files used for benchmarking, along with a run.sh script to automate the benchmarking process. Here are the detailed results:
+
+### python3 -m http.server
+```
+Statistics        Avg      Stdev        Max
+  Reqs/sec      1501.94     297.64    3249.71
+  Latency       84.75ms   458.09ms     15.47s
+  HTTP codes:
+    1xx - 0, 2xx - 45205, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:     0.86MB/s
+```
+
+### Flask w/ guvicorn
+```
+Statistics        Avg      Stdev        Max
+  Reqs/sec     23355.06    8909.87   36359.07
+  Latency        5.35ms     2.73ms   121.66ms
+  HTTP codes:
+    1xx - 0, 2xx - 700131, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:     4.81MB/s
+```
+
+### HTTB
+```
+Statistics        Avg      Stdev        Max
+  Reqs/sec      1287.59     226.72    2057.52
+  Latency       96.81ms   168.72ms      3.17s
+  HTTP codes:
+    1xx - 0, 2xx - 13004, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:   304.04KB/s
+```
+
+### Node.js
+```
+Statistics        Avg      Stdev        Max
+  Reqs/sec     91833.85    4907.33   97671.88
+  Latency        1.36ms   119.26us    17.27ms
+  HTTP codes:
+    1xx - 0, 2xx - 2754740, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    19.09MB/s
+```
+
+### Golang
+```
+Statistics        Avg      Stdev        Max
+  Reqs/sec    304523.14   32166.94  453253.21
+  Latency      407.73us   182.95us    91.07ms
+  HTTP codes:
+    1xx - 0, 2xx - 9138757, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    52.29MB/s
 ```
