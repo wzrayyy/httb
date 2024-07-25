@@ -6,7 +6,7 @@ HTTB allows you to create a basic HTTP server using only bash scripts and the `s
 # 🛠️ Setup
 These instructions will help you get started with HTTB!
 
-### 🐋 Docker
+## 🐋 Docker
 I would heavily recommend **not** running this on bare metal, as safety was (and still is) my last concern at the moment. This repository contains an example `Dockerfile` and `docker-compose.yml` files that can get you started.
 
 To get started with Docker:
@@ -22,23 +22,23 @@ To get started with Docker:
     docker compose up --build
     ```
 
-### 🖥️ Native
-If you prefer to run HTTB natively on your system, ensure you have `bash` and `socat` installed. These tools are necessary for creating and managing TCP sockets.
+## 🖥️ Native
+If you prefer to run HTTB natively on your system, ensure you have `bash socat file` installed. These tools are necessary for running this server.
 
 ### Debian/Linux Mint
-To install `socat` on Debian-based systems:
+To install dependencies on Debian-based systems:
 ```bash
 sudo apt-get install socat
 ```
 
 ### Arch Linux
-To install `socat` on Arch-based systems:
+To install dependencies on Arch-based systems:
 ```bash
 sudo pacman -S socat
 ```
 
 ### macOS
-To install `socat` on macOS using Homebrew:
+To install dependencies on macOS using Homebrew:
 ```bash
 brew install socat
 ```
@@ -83,7 +83,7 @@ server::post_form() {
 http::run "$@"
 ```
 
-# ⚡ Benchmarking
+# ⚡ Benchmarks
 It's... bad 🥲
 
 All benchmarks were conducted on an i7-1360P laptop with 16GB of RAM using the tool codesenberg/bombardier. The benchmark folder in the repository contains all the source files used for benchmarking, along with a run.sh script to automate the benchmarking process. Here are the detailed results:
