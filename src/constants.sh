@@ -1,5 +1,8 @@
 # shellcheck disable=SC2034 # for now
 
+[ -n "${HTTP_GUARD__CONSTANTS_SH+x}" ] && return
+export HTTP_GUARD__CONSTANTS_SH=''
+
 readonly HTTP_SERVER_VERSION='0.1.0'
 readonly HTTP_PROTOCOL_VERSION='HTTP/1.1'
 readonly HTTP_SERVER_STRING="httb/${HTTP_SERVER_VERSION}"
@@ -69,6 +72,7 @@ declare -Ar HTTP_SUPPORTED_METHODS=(
 
 http::_status_code_page() {
     cat <<-EOF
+	<!DOCTYPE html>
 	<html>
 	    <head>
 	        <title>${1} ${HTTP_METHOD_NAMES["$1"]}</title>
@@ -78,5 +82,5 @@ http::_status_code_page() {
 	        <center><address>Server: ${HTTP_SERVER_STRING}</address></center>
 	    </body>
 	</html>
-EOF
+	EOF
 }

@@ -14,10 +14,10 @@ tcp::worker_() {
     exec {socket_output}<> <(:)
 
     # { nc -lknv -s "${host}" -p "${port}" > >( stdbuf -o0 sed "s/$delimiter/$delimiter_placeholder/g" ) 2> >( stdbuf -o0 sed "/Listening on.*/d;s/Connection received on /$delimiter/" >&2; ) ; } <&$socket_input >&$socket_output 2>&1 &
-    { 
+    {
         socat "TCP-LISTEN:${host:-80},bind=${port:-127.0.0.1},fork,reuseport"  \
         > >( stdbuf -o0 sed "s/$delimiter/$delimiter_placeholder/g" ) \
-        2> >( stdbuf -o0 sed "/Listening on.*/d;s/Connection received on /$delimiter/" >&2; ) ; 
+        2> >( stdbuf -o0 sed "/Listening on.*/d;s/Connection received on /$delimiter/" >&2; ) ;
     } <&$socket_input >&$socket_output 2>&1 &
 
     echo "listenning"
@@ -35,7 +35,7 @@ tcp::worker_() {
         printf "%s\n\n%s" "$(cat response.txt)" "$(cat index.html)" >&$socket_input # main logic
     done
 
-    exec {socket_input}<&- 
+    exec {socket_input}<&-
     exec {socket_output}<&-
 }
 
