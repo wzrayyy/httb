@@ -31,29 +31,6 @@ To get started with Docker:
     # Add your additional setup steps here, if needed
     ```
 
-4. **Run the Docker container using `docker-compose`**:
-    ```sh
-    docker-compose up --build
-    ```
-
-### Example `docker-compose.yml`
-Here is an example `docker-compose.yml` file to help you get started:
-
-```yaml
-version: '3.8'
-
-services:
-  httb:
-    image: httb:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-```
-
-With these steps and files, you should be able to set up and run your httb server in a Docker container.
-
 ## 🖥️ Native
 If you prefer to run httb natively on your system, ensure you have `bash socat file` installed. These tools are necessary for running this server.
 

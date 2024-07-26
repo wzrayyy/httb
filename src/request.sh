@@ -23,6 +23,7 @@ http::_route_request() {
     for glob_endpoint in "${!http__all_routes[@]}"; do # FIXME O(n)
         # shellcheck disable=SC2053
         if [[ "${request_path}" == ${glob_endpoint} ]]; then
+            declare -rx HTTP_REQUEST_GLOB="${glob_endpoint}"
             path_found=1
             break
         fi
