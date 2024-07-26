@@ -17,13 +17,12 @@ http::_parse_headers() {
 http::_parse_body() { cat - >/dev/null; } # TODO
 
 http::_route_request() {
-    [[ -z "${HTTP_SUPPORTED_METHODS[${request_method}]}" ]] && http::response 501 && return 1
+    [[ -z "${HTTP_SUPPORTED_METHODS[${request_method}]}" ]] && { http::response 501; return 1; }
     local glob_endpoint handler path_found
 
     for glob_endpoint in "${!http__all_routes[@]}"; do # FIXME O(n)
         # shellcheck disable=SC2053
         if [[ "${request_path}" == ${glob_endpoint} ]]; then
-            declare -rx HTTP_REQUEST_GLOB="${glob_endpoint}"
             path_found=1
             break
         fi

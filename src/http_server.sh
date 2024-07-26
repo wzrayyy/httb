@@ -65,7 +65,7 @@ http::get() { http::route "$1" "GET" "$2"; }
 http::_static_file() {
     local uri_path="${request_path#"${HTTP_REQUEST_GLOB%'**'}"}"
     local filename="${HTTP_STATIC_FOLDER}/${uri_path}"
-    [[ -z "${uri_path}" || ! -f "${filename}" || "${filename}" == *".."* ]] && http::response 404 && return 1
+    [[ -z "${uri_path}" || ! -f "${filename}" || "${filename}" == *".."* ]] && http::response 400 && return 1
     http::file "${filename}"
 }
 

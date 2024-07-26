@@ -69,5 +69,15 @@ http::file() {
 
 
 # calle provides local -A response_headers
+# $1 = url, $2 = status code (301/302, optional)
+http::redirect() {
+    local status_code="${2:-302}"
+    [[ -z "$1" ]] && { http::response 500 && return 1; }
+    http::_response_base_headers "${status_code}"
+    response_headers["Location"]="$1"
+    http::_output_response_headers
+}
+
+# calle provides local -A response_headers
 # $1 = filename
 http::html() { response_headers["Content-Type"]="text/html" http::file "$@"; }
