@@ -4,7 +4,7 @@ A simple HTTP framework written entirely in bash!
 HTTB allows you to create a basic HTTP server using only bash scripts and the `socat` utility. It's utterly slow and useless, but if you _really_ want to build a web server in bash, then you have a tool for it!
 
 # 🛠️ Setup
-These instructions will help you get started with HTTB!
+These instructions will help you get started with httb!
 
 ## 🐋 Docker
 I would heavily recommend **not** running this on bare metal, as safety was (and still is) my last concern at the moment. This repository contains an example `Dockerfile` and `docker-compose.yml` files that can get you started.
@@ -17,13 +17,45 @@ To get started with Docker:
     cd httb
     ```
 
-2. **Build and run the Docker image**:
+2. **Build the Docker image with a tag**:
     ```sh
-    docker compose up --build
+    docker build -t httb .
     ```
 
+3. **Edit your Dockerfile to include `FROM httb:latest`**:
+    Ensure your `Dockerfile` uses the `httb:latest` directive:
+
+    ```Dockerfile
+    FROM httb:latest
+
+    # Add your additional setup steps here, if needed
+    ```
+
+4. **Run the Docker container using `docker-compose`**:
+    ```sh
+    docker-compose up --build
+    ```
+
+### Example `docker-compose.yml`
+Here is an example `docker-compose.yml` file to help you get started:
+
+```yaml
+version: '3.8'
+
+services:
+  httb:
+    image: httb:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+```
+
+With these steps and files, you should be able to set up and run your httb server in a Docker container.
+
 ## 🖥️ Native
-If you prefer to run HTTB natively on your system, ensure you have `bash socat file` installed. These tools are necessary for running this server.
+If you prefer to run httb natively on your system, ensure you have `bash socat file` installed. These tools are necessary for running this server.
 
 ### Debian/Linux Mint
 To install dependencies on Debian-based systems:
@@ -47,7 +79,7 @@ brew install socat
 On Windows, you can use WSL (Windows Subsystem for Linux) to run a Linux distribution and follow the instructions for your preferred distro.
 
 # 📋 Usage
-Here is a sample script to get you started with HTTB:
+Here is a sample script to get you started with httb:
 
 ```sh
 #!/bin/bash
