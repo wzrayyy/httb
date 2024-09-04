@@ -39,9 +39,8 @@ http::run() {
 
 http::host() { export HTTP_HOST_NAME="$1"; }
 http::bind() { export HTTP_HOST="${1:-${HTTP_DEFAULT_HOST}}"; export HTTP_PORT="${2:-${HTTP_DEFAULT_PORT}}"; }
-http::markdown_base() { export HTTP_MARKDOWN_BASE="$1"; }
 
-http::static_folder() {
+http::static_folder() { # TODO add multiple static folders
     http__handlers["GET,$1/**"]="http::_static_file"
     http__all_routes["$1/**"]=1
     export HTTP_STATIC_FOLDER="$2";

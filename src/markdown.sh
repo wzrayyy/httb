@@ -5,14 +5,16 @@ export HTTP_GUARD__MARKDOWN_SH=''
 
 
 http::_convert_to_md() {
-    local -a pandoc_options=(
-	'--from=gfm+tex_math_dollars '
-	'--to=html'
+    local -a _pandoc_options=(
+	'--from=gfm+tex_math_dollars+footnotes+emoji-autolink_bare_uris'
+	'--to=html+raw_html'
 	'--mathjax'
 	'--toc'
 	"--template=${HTTP_MARKDOWN_BASE:-'default.html5'}"
+	"--variable=published_time=$(date -Iseconds -d"$(stat "$1" | grep 'Birth:' | sed 's/.*Birth:\s//')")"
+	"${pandoc_options[@]}"
     )
-    pandoc "${pandoc_options[@]}" "$1"
+    pandoc "${_pandoc_options[@]}" "$1"
 }
 
 http::md() {

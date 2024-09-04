@@ -95,7 +95,7 @@ http::run "$@"
 # ⚡ Benchmarks
 It's... bad 🥲
 
-All benchmarks were conducted on an i7-1360P laptop with 16GB of RAM using the tool codesenberg/bombardier. The benchmark folder in the repository contains all the source files used for benchmarking, along with a run.sh script to automate the benchmarking process. Here are the detailed results:
+All benchmarks were conducted on an i7-1360P laptop with 16GB of RAM using the tool codesenberg/bombardier. Here are the detailed results:
 
 ### python3 -m http.server
 ```
